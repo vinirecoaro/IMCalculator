@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imcalculator/model/imc.dart';
 
 class ImcHistoricPage extends StatefulWidget {
   const ImcHistoricPage({super.key});
@@ -11,6 +12,7 @@ class _ImcHistoricPageState extends State<ImcHistoricPage> {
   var dateController = TextEditingController(text: "");
   var heightController = TextEditingController(text: "");
   var weightController = TextEditingController(text: "");
+  List<IMC> imcList = [];
 
   @override
   Widget build(BuildContext context) {
