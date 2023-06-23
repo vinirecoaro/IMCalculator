@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CarLabel extends StatelessWidget {
+class CardLabel extends StatelessWidget {
   final String date;
   final double imc;
-  const CarLabel({super.key, required this.date, required this.imc});
+  const CardLabel({super.key, required this.date, required this.imc});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CarLabel extends StatelessWidget {
                 children: [
                   Text(
                     date,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ],
               ),
@@ -31,7 +31,7 @@ class CarLabel extends StatelessWidget {
               children: [
                 Text(
                   "IMC = ${imc.toString()}",
-                  style: TextStyle(fontSize: 25),
+                  style: const TextStyle(fontSize: 25),
                 )
               ],
             )
@@ -39,6 +39,5 @@ class CarLabel extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

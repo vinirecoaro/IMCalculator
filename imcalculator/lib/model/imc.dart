@@ -22,6 +22,6 @@ class IMC {
   }
 
   double returnIMC() {
-    return this._weight / (this._height * this._height);
+    return _weight / (_height * _height);
   }
 }
