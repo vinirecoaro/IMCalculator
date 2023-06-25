@@ -22,6 +22,8 @@ class IMC {
   }
 
   double returnIMC() {
-    return _weight / (_height * _height);
+    var imcCalculated = _weight / (_height * _height);
+    var imcFormated = double.parse(imcCalculated.toStringAsFixed(2));
+    return imcFormated;
   }
 }
