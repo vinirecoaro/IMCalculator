@@ -12,17 +12,17 @@ class _CardPageState extends State<CardPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: 90,
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           elevation: 16,
-          child: Column(
+          child: const Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8),
+                padding: EdgeInsets.only(top: 8, left: 8),
                 child: Row(
                   children: [
                     Text(

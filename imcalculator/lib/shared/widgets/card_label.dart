@@ -7,7 +7,7 @@ class CardLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 90,
       child: Card(
