@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imcalculator/model/imc.dart';
 import 'package:imcalculator/repositories/imc_repository.dart';
+import 'package:imcalculator/service/app_storage_sevice.dart';
 import 'package:imcalculator/shared/widgets/card_label.dart';
 
 class ImcHistoricPage extends StatefulWidget {
@@ -17,10 +18,20 @@ class _ImcHistoricPageState extends State<ImcHistoricPage> {
   var _imcList = <IMC>[];
   var imcRepository = IMCRepository();
 
+  var appStorageService = AppStorageService();
+
+  double? height;
+
   @override
   void initState() {
     super.initState();
     _imcList = imcRepository.returnIMCList();
+    loadData();
+  }
+
+  void loadData() async {
+    height = await appStorageService.getHeight();
+    setState(() {});
   }
 
   @override
@@ -31,7 +42,7 @@ class _ImcHistoricPageState extends State<ImcHistoricPage> {
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 dateController.text = "";
-                heightController.text = "";
+                heightController.text = height.toString();
                 weightController.text = "";
                 showDialog(
                     context: context,
@@ -57,6 +68,8 @@ class _ImcHistoricPageState extends State<ImcHistoricPage> {
                         actions: [
                           TextButton(
                               onPressed: () {
+                                appStorageService.setHeight(
+                                    double.parse(heightController.text));
                                 imcRepository.addImc(IMC(
                                     dateController.text,
                                     double.parse(heightController.text),
