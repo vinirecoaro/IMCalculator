@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imcalculator/model/imc.dart';
-import 'package:imcalculator/repositories/imc_repository.dart';
+import 'package:imcalculator/repositories/imc_sqlite_repository.dart';
 import 'package:imcalculator/service/app_storage_sevice.dart';
 import 'package:imcalculator/shared/widgets/card_label.dart';
 
@@ -16,20 +16,21 @@ class _ImcHistoricPageState extends State<ImcHistoricPage> {
   var heightController = TextEditingController(text: "");
   var weightController = TextEditingController(text: "");
   var _imcList = <IMC>[];
-  var imcRepository = IMCRepository();
 
   var appStorageService = AppStorageService();
+
+  IMCSQLiteRepository imcRepository = IMCSQLiteRepository();
 
   double? height;
 
   @override
   void initState() {
     super.initState();
-    _imcList = imcRepository.returnIMCList();
     loadData();
   }
 
   void loadData() async {
+    _imcList = await imcRepository.obtainData();
     height = await appStorageService.getHeight();
     setState(() {});
   }
@@ -70,11 +71,12 @@ class _ImcHistoricPageState extends State<ImcHistoricPage> {
                               onPressed: () {
                                 appStorageService.setHeight(
                                     double.parse(heightController.text));
-                                imcRepository.addImc(IMC(
+                                imcRepository.save(IMC(
                                     dateController.text,
                                     double.parse(heightController.text),
                                     double.parse(weightController.text)));
                                 Navigator.pop(context);
+                                loadData();
                                 setState(() {});
                               },
                               child: const Text("Salvar"))
